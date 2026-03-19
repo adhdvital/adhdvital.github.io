@@ -705,36 +705,6 @@
 // =============================================
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxQHsMWzCreQAMjHnDOM0CEptnuPAGKcIos-VG_InKlbZn6Fss-8KKDVVt5xPU6vno/exec';
 
-// Token from URL
-const urlParams = new URLSearchParams(window.location.search);
-const TOKEN = urlParams.get('token') || '';
-
-// =============================================
-// Token Validation on Page Load (client-side)
-// UUID v4 tokens = 128-bit entropy, URLs are unguessable
-// =============================================
-(function initPage() {
-  const loadingSection = document.getElementById('loadingSection');
-  const errorSection = document.getElementById('errorSection');
-  const formSection = document.getElementById('formSection');
-  const errorMessage = document.getElementById('errorMessage');
-
-  // Validate token format: must be a valid UUID v4
-  const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-
-  if (!TOKEN || !UUID_RE.test(TOKEN)) {
-    loadingSection.style.display = 'none';
-    errorSection.querySelector('h2').textContent = 'Потрібне запрошення';
-    errorMessage.innerHTML = 'Ця форма доступна тільки за персональним посиланням. Якщо ти маєш його — перевір URL.';
-    errorSection.classList.add('visible');
-    return;
-  }
-
-  // Token present and valid format — show form
-  loadingSection.style.display = 'none';
-  formSection.style.display = '';
-})();
-
 // =============================================
 // SVG Scalloped Ticket Path Generator
 // =============================================
